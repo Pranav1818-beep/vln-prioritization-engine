@@ -34,6 +34,7 @@ This is a simplified model for educational and prototyping purposes.
 ---
 
 ## Output Example
+
 Rank 1
 CVE: CVE-XXXX-XXXX
 Risk Score: 34.50
