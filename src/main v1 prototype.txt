@@ -1,0 +1,57 @@
+import pandas as pd
+
+from fetchers.epss import get_epss_score
+
+def main():
+
+	df = pd.read_csv("data/sample_cves.csv")
+
+	print("\n=== Vulnerability EPSS Enrichment ===\m")
+
+	for _, row in df.iterrows():
+
+		cve_id = row["cve_id"]
+		cvss = row["cvss_score"]
+		criticality = row["asset_criticality"]
+
+		print(f"Processing {cve_id}...")
+
+		epss = get_epss_score(cve_id)
+
+		print(
+			f"\nCVE: {cve_id}\n"
+			f"CVSS: {cvss}\n"
+			f"Asset Criticality: {criticality}\n"
+			f"EPSS: {epss}\n"
+			f"----------------------------\n"
+		)
+
+
+if __name__ == "__main__":
+    main()
+import pandas as pd
+from fetchers.epss import get_epss_score
+
+def main():
+    df = pd.read_csv("data/sample_cves.csv")
+
+    print("\n=== Vulnerability EPSS Enrichment ===")
+
+    for _, row in df.iterrows():
+        cve_id = row["cve_id"]
+        cvss = row["cvss_score"]
+        criticality = row["asset_criticality"]
+
+        print(f"\nProcessing {cve_id}...")
+
+        epss = get_epss_score(cve_id)
+
+        print(
+            f"CVE: {cve_id}\n"
+            f"CVSS: {cvss}\n"
+            f"Asset Criticality: {criticality}\n"
+            f"EPSS: {epss}\n"
+        )
+
+if __name__ == "__main__":
+    main()

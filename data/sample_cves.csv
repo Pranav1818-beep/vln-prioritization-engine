@@ -1,0 +1,5 @@
+cve_id,cvss_score,asset_criticality
+CVE-2024-3094,10.0,critical
+CVE-2023-44487,8.1,high
+CVE-2021-44228,10.0,critical
+CVE-2022-22965,9.8,high
