@@ -34,3 +34,25 @@ This is a simplified model for educational and prototyping purposes.
 ---
 
 ## Output Example
+Rank 1
+CVE: CVE-XXXX-XXXX
+Risk Score: 34.50
+CVSS: 10.0
+EPSS: 0.92
+Asset Criticality: critical (5)
+
+---
+
+## Purpose
+This project demonstrates:
+- Vulnerability data enrichment
+- Basic risk-based prioritization
+- Early-stage SOC/VM pipeline design thinking
+
+---
+
+## Future Improvements
+- Integrate NVD API for CVSS validation
+- Add CISA KEV enrichment
+- Improve scoring model with threat intelligence signals
+- Export results to JSON/CSV formats
