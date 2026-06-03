@@ -23,6 +23,7 @@ def map_asset_criticality(value):
 
     return mapping.get(str(value).lower(), 1)
 
+
 def main():
     df = pd.read_csv("data/sample_cves.csv")
 
@@ -31,40 +32,56 @@ def main():
     results = []
 
     for _, row in df.iterrows():
-        cve_id = row["cve_id"]
-        cvss = float(row["cvss_score"])
+
+        # --- Build model ---
+        vuln = Vulnerability(row["cve_id"])
+        vuln.cvss = float(row["cvss_score"])
+        vuln.asset_criticality = row["asset_criticality"]
+
+        # --- Normalize asset criticality ---
         asset_criticality_label = row["asset_criticality"]
         asset_criticality_score = map_asset_criticality(asset_criticality_label)
 
-        print(f"Processing {cve_id}...")
+        print(f"Processing {vuln.cve_id}...")
 
-        epss = get_epss_score(cve_id)
-        risk_score = calculate_risk_score(cvss, epss, asset_criticality_score)
+        # --- EPSS enrichment ---
+        epss = get_epss_score(vuln.cve_id)
+        vuln.epss = epss
 
+        # --- Risk calculation ---
+        risk_score = calculate_risk_score(
+            vuln.cvss,
+            vuln.epss,
+            asset_criticality_score
+        )
+
+        vuln.risk_score = risk_score
+
+        # --- Store results ---
         results.append({
-            "cve_id": cve_id,
-            "cvss": cvss,
-            "epss": epss,
+            "cve_id": vuln.cve_id,
+            "cvss": vuln.cvss,
+            "epss": vuln.epss,
             "asset_criticality_label": asset_criticality_label,
             "asset_criticality_score": asset_criticality_score,
             "risk_score": risk_score
         })
 
-    # Sort by risk score (highest priority first)
+    # --- Sort by risk score ---
     results.sort(key=lambda x: x["risk_score"], reverse=True)
 
     print("\n=== PRIORITIZED VULNERABILITIES ===\n")
 
     for i, item in enumerate(results, 1):
         print(
-             f"Rank {i}\n"
-             f"CVE: {item['cve_id']}\n"
-             f"Risk Score: {item['risk_score']:.2f}\n"
-             f"CVSS: {item['cvss']}\n"
-             f"EPSS: {item['epss']}\n"
-             f"Asset Criticality: {item['asset_criticality_label']} "
-             f"({item['asset_criticality_score']})\n"
-             f"----------------------------\n"
+            f"Rank {i}\n"
+            f"CVE: {item['cve_id']}\n"
+            f"Risk Score: {item['risk_score']:.2f}\n"
+            f"CVSS: {item['cvss']}\n"
+            f"EPSS: {item['epss']}\n"
+            f"Asset Criticality: {item['asset_criticality_label']} "
+            f"({item['asset_criticality_score']})\n"
+            f"----------------------------\n"
         )
 
 
