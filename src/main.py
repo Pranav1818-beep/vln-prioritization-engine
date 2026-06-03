@@ -1,5 +1,6 @@
 import pandas as pd
 from fetchers.epss import get_epss_score
+from models.vuln import Vulnerability
 
 
 def calculate_risk_score(cvss, epss, asset_criticality_score):
