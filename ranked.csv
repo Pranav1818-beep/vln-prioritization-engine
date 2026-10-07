@@ -1,0 +1,5 @@
+rank,cve_id,asset,priority,risk_score,cvss,epss,kev,asset_criticality,vendor,vendor_id,vendor_severity,missing_inputs
+1,CVE-2021-44228,,P1,100.0,10.0,0.99999,True,critical,,,,vendor
+2,CVE-2022-22965,,P1,100.0,9.8,0.99638,True,high,,,,vendor
+3,CVE-2023-44487,,P1,100.0,8.1,0.99999,True,high,,,,vendor
+4,CVE-2024-3094,,P1,95.32,10.0,0.85974,False,critical,,,,vendor

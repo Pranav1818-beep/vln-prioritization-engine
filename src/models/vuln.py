@@ -1,58 +1,33 @@
+from dataclasses import dataclass, field
+from typing import Optional
+
+
+@dataclass
 class Vulnerability:
     """
-    Core data model representing a CVE and all enriched attributes.
-    This acts as the single source of truth for the pipeline.
+    Core data model: one finding (a CVE on an asset) plus all enriched attributes.
+    The CVE ID is the join key for enrichment (EPSS, KEV).
+    Vendor fields (e.g. Qualys QID / severity) are optional so the engine
+    stays vendor-neutral.
     """
 
-    def __init__(self, cve_id: str):
-        self.cve_id = cve_id
+    cve_id: str
 
-        # Base attributes (from CSV / NVD)
-        self.cvss = None
-        self.asset_criticality = None
+    # --- Base attributes (come from the input CSV) ---
+    cvss: Optional[float] = None
+    asset_criticality: str = "low"
+    asset: Optional[str] = None
 
-        # Enrichment attributes
-        self.epss = None
-        self.kev = False
+    # --- Optional vendor attributes (e.g. vendor="qualys", vendor_id=QID) ---
+    vendor: Optional[str] = None
+    vendor_id: Optional[str] = None
+    vendor_severity: Optional[int] = None  # assumed 1-5 scale
 
-        # Computed attributes
-        self.risk_score = None
+    # --- Enrichment attributes (filled in by the fetchers) ---
+    epss: Optional[float] = None  # None = unknown, which is different from 0.0
+    kev: bool = False             # True = listed in CISA KEV
 
-    def __repr__(self):
-        return (
-            f"<Vulnerability {self.cve_id} | "
-            f"CVSS={self.cvss} | "
-            f"EPSS={self.epss} | "
-            f"KEV={self.kev} | "
-            f"Risk={self.risk_score}>"
-        )
-
-class Vulnerability:
-    """
-    Core data model representing a CVE and all enriched attributes.
-    This acts as the single source of truth for the pipeline.
-    """
-
-    def __init__(self, cve_id: str):
-        self.cve_id = cve_id
-
-        # Base attributes (from CSV / NVD)
-        self.cvss = None
-        self.asset_criticality = None
-
-        # Enrichment attributes
-        self.epss = None
-        self.kev = False
-
-        # Computed attributes
-        self.risk_score = None
-
-    def __repr__(self):
-        return (
-            f"<Vulnerability {self.cve_id} | "
-            f"CVSS={self.cvss} | "
-            f"EPSS={self.epss} | "
-            f"KEV={self.kev} | "
-            f"Risk={self.risk_score}>"
-        )
-
+    # --- Computed attributes (filled in by the scoring engine) ---
+    risk_score: Optional[float] = None  # 0-100
+    priority: Optional[str] = None      # P1 (fix first) .. P4
+    breakdown: dict = field(default_factory=dict)  # explains how the score was built
