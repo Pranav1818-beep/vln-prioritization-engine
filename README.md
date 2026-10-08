@@ -122,3 +122,7 @@ This project demonstrates:
 - Risk-based prioritization beyond CVSS
 - Handling of missing and unreliable data in a VM pipeline
 - Testable, maintainable pipeline design
+
+---
+
+**Note:** asset names and criticality in `data/sample_cves.csv` are synthetic.

@@ -6,3 +6,4 @@ data/cache/
 .venv/
 venv/
 outputs/
+ranked.csv
