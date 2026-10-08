@@ -88,11 +88,19 @@ Illustrative values:
 #   CVE              Pri   Score  CVSS    EPSS KEV  Asset     Missing
 ------------------------------------------------------------------------
 1   CVE-2021-44228   P1    100.0  10.0  1.0000 yes  critical  vendor
-2   CVE-2022-22965   P1    100.0   9.8  0.9964 yes  high      vendor
-3   CVE-2023-44487   P1    100.0   8.1  1.0000 yes  high      vendor
-4   CVE-2024-3094    P1     95.3  10.0  0.8597 no   critical  vendor
-
-Wrote 4 rows to ranked.csv
+2   CVE-2017-0144    P1    100.0   8.1  0.9923 yes  critical  vendor
+3   CVE-2022-22965   P1    100.0   9.8  0.9964 yes  high      vendor
+4   CVE-2021-34527   P1    100.0   8.8  0.9979 yes  high      vendor
+5   CVE-2023-44487   P1    100.0   7.5  1.0000 yes  high      vendor
+6   CVE-2019-0708    P1    100.0   9.8  1.0000 yes  medium    vendor
+7   CVE-2014-0160    P1     90.0   7.5  1.0000 yes  low       vendor
+8   CVE-2023-48795   P1     77.5   5.9  0.9355 no   high      vendor
+9   CVE-2023-38545   P2     72.2   9.8  0.7848 no   medium    vendor
+10  CVE-2024-3094    P2     68.7  10.0  0.8597 no   low       vendor
+11  CVE-2022-3602    P2     68.6   7.5  0.9077 no   medium    vendor
+12  CVE-2023-48795   P2     57.5   5.9  0.9355 no   low       vendor
+13  CVE-2018-15473   P2     57.2   5.3  0.9863 no   low       vendor
+14  CVE-2020-8284    P4     20.3   3.7  0.0390 no   low       vendor
 
 ```
 
