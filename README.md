@@ -82,7 +82,7 @@ Each input is normalized to 0-1, then combined with these default weights:
 ---
 
 ## Output Example
-Illustrative values:
+Live run, 8 Oct 2026 (EPSS values change daily):
 
 ```
 #   CVE              Pri   Score  CVSS    EPSS KEV  Asset     Missing
